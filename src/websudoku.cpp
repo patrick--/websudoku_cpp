@@ -56,7 +56,7 @@ void Websudoku::write_to_file(const std::string& f, bool with_solved) {
 }
 
 std::string Websudoku::to_str(bool with_solved) {
-	return (with_solved ? format_puzzle_str(true) + format_puzzle_str() : format_puzzle_str());
+	return (with_solved ? format_puzzle_str(true) + format_puzzle_str() : format_puzzle_str(true));
 }
 	
 std::string Websudoku::format_puzzle_str(bool use_mask) {
