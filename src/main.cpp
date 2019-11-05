@@ -2,14 +2,22 @@
 #include "websudoku.h"
 
 int main() {
-  //std::cout << "Main launched!!" << std::endl;
-  //std::cout << "Using external resource httplib to make a get request..." << std::endl;
-  
-  Websudoku ws = Websudoku(Puzzle_difficulty::easy);
-  ws.download_new_puzzle();
-  //std::string test123 = ws.to_str(true);
-  std::cout << ws.to_str(true);
 
+	std::cout << "Downloading a new puzzle with an easy difficulty!" << "\n";
 
+	Websudoku ws = Websudoku(Puzzle_difficulty::easy);
+
+	ws.download_new_puzzle();
+
+  	std::cout << "Displaying puzzle in console: " << "\n" << ws.to_str() << "\n";
+
+  	std::cout << "Downloading a harder puzzle! " << "\n";
+
+  	ws.download_new_puzzle(Puzzle_difficulty::evil);
+
+  	std::cout << "Displaying puzzle in console: " << "\n" << ws.to_str() << "\n";
+
+    std::cout << "Displaying puzzle in console with solution: " << "\n" << ws.to_str(true) << "\n";
+ 
   return 0;
 }
