@@ -7,6 +7,11 @@
 const auto websudoku_url = "nine.websudoku.com";
 const auto api_port = 80;
 
+struct ApiParseResult { 
+	std::string parsed_puzzle_str; 
+	std::string parsed_puzzle_mask;
+};
+	
 Websudoku::Websudoku() : api_client (websudoku_url, api_port)  { }
 
 Websudoku::Websudoku(Puzzle_difficulty diff) 
@@ -17,16 +22,19 @@ void Websudoku::set_difficulty_level(Puzzle_difficulty diff) {
 }
 
 void Websudoku::download_new_puzzle() {
-	std::tie(puzzle_raw_str, puzzle_mask) = parse_api_result(api_request());
+	struct ApiParseResult res = parse_api_result(api_request());
+	puzzle_raw_str = res.parsed_puzzle_str;
+	puzzle_mask = res.parsed_puzzle_mask;
 }
 
 void Websudoku::download_new_puzzle(Puzzle_difficulty temp_diff) {
 	auto existing_diff = diff_level;
 
 	diff_level = temp_diff;
-	std::tie(puzzle_raw_str, puzzle_mask) = parse_api_result(api_request());
-
+	struct ApiParseResult res = parse_api_result(api_request());
 	diff_level = existing_diff;
+	puzzle_raw_str = res.parsed_puzzle_str;
+	puzzle_mask = res.parsed_puzzle_mask;
 }
 
 void Websudoku::write_to_file(const std::string& f, bool with_solved) {
@@ -107,7 +115,7 @@ std::string Websudoku::api_request() {
 
 }
 
-std::tuple<std::string, std::string> Websudoku::parse_api_result(const std::string& api_res) {
+struct ApiParseResult Websudoku::parse_api_result(const std::string& api_res) {
 
 	const auto puzzle_search_str = "<INPUT NAME=cheat ID=\"cheat\" TYPE=hidden VALUE=\"";
 	const auto mask_search_str = "<INPUT ID=\"editmask\" TYPE=hidden VALUE=\"";
@@ -129,6 +137,6 @@ std::tuple<std::string, std::string> Websudoku::parse_api_result(const std::stri
 
 	std::string mask = api_res.substr(str_index + strlen(mask_search_str), str_extract_len);
 
-	return std::make_tuple(puzzle,mask);
+	return ApiParseResult{puzzle, mask};
 
 }

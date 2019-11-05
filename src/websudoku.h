@@ -5,6 +5,7 @@
 #include "httplib.h"
 
 enum class Puzzle_difficulty { easy = 1, medium, hard, evil };
+struct ApiParseResult; 
 
 class Websudoku {
 
@@ -23,8 +24,7 @@ private:
 	std::string format_puzzle_str(bool use_mask = false);
 	std::string difficulty_to_str();
 	std::string api_request();
-	std::tuple<std::string, std::string> parse_api_result(const std::string& res);
-
+	struct ApiParseResult parse_api_result(const std::string& res);
 	httplib::Client api_client;
 	std::string puzzle_raw_str {};
 	std::string puzzle_mask {};
