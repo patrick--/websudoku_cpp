@@ -2,6 +2,8 @@
 Scraper for generating valid sudoku puzzles along with solutions from websudoku. 
 
 ---
+[![Build Status](https://travis-ci.com/patrick--/websudoku_cpp.svg?branch=master)](https://travis-ci.com/patrick--/websudoku_cpp)
+
 
 ### Overview
 Websudokucpp is a straightforward web scraper for downloading Sudoku puzzles and solutions from [Websudoku.com](https://www.websudoku.com/?). Core HTTP request functionality is implemented using the fantastic [cpp-httplib](https://github.com/yhirose/cpp-httplib) header only library.
