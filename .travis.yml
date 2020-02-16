@@ -17,4 +17,4 @@ install:
 script:
   - make
   - ./websudoku_cpp
-  - cppcheck src --error-exitcode=1 ./src
+  - cppcheck src --error-exitcode=1 ../src

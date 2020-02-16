@@ -19,5 +19,6 @@ int main() {
 
     std::cout << "Displaying puzzle in console with solution: " << "\n" << ws.to_str(true) << "\n";
  
+ 	std::cout << "Done!";
   return 0;
 }
